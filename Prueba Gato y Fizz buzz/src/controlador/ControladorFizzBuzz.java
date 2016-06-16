@@ -18,6 +18,12 @@ public class ControladorFizzBuzz {
        this.fizzbuzz = new FizzBuzz();
     }
     
+    /**
+     * Este método llama al método de listar números de la parte de la lógica
+     * del fizzbuzz
+     * 
+     * @return String[] Devuelve la lista de números en un string
+     */
     public String[] listarNumeros(){
         return fizzbuzz.enlistarNumero();
     }

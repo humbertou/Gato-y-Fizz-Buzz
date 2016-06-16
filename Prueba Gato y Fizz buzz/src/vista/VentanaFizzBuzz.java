@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package vista;
 
 import javax.swing.UIManager;
@@ -10,14 +6,16 @@ import controlador.ControladorFizzBuzz;
 import javax.swing.DefaultListModel;
 
 /**
- *
+ * Esta clase es la encargada de establecer la interfaz del fizzbuzz.
+ * Tiene como atributos la instancia al controlador.
+ * 
+ * @version 15 de junio 2016 
  * @author Humberto
  */
 public class VentanaFizzBuzz extends javax.swing.JFrame {
 
     private final controlador.ControladorFizzBuzz controlador;
-    
-    
+        
     public VentanaFizzBuzz() {
         initComponents();
         this.controlador = new ControladorFizzBuzz();
@@ -37,7 +35,11 @@ public class VentanaFizzBuzz extends javax.swing.JFrame {
         btnGenerar = new javax.swing.JButton();
         lblTitulo = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Fizz Buzz");
+        setMaximumSize(new java.awt.Dimension(400, 300));
+        setMinimumSize(new java.awt.Dimension(400, 300));
+        setResizable(false);
 
         jScrollPane1.setBorder(new javax.swing.border.MatteBorder(null));
 
@@ -86,11 +88,14 @@ public class VentanaFizzBuzz extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /*
+    Botones
+    */
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
-        String[] lista = this.controlador.listarNumeros();
+        String[] listaNumeros = this.controlador.listarNumeros();
         DefaultListModel modeloLista = new DefaultListModel();
-        for (int contador = 1; contador < lista.length; contador++){
-            modeloLista.addElement(lista[contador]);
+        for (int contador = 1; contador < listaNumeros.length; contador++){
+            modeloLista.addElement(listaNumeros[contador]);
         }
         lstNumeros.setModel(modeloLista);
     }//GEN-LAST:event_btnGenerarActionPerformed

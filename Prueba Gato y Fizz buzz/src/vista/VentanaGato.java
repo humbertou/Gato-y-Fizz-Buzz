@@ -1,11 +1,3 @@
-/**
- * Esta clase es la encargada de establecer la lógica del juego del gato.
- * Tiene como atributos la matriz, el turno y el contador de jugadas. 
- * 
- * @version 15 de junio 2016 
- * @author Humberto
- */
-
 package vista;
 
 import controlador.ControladorGato;
@@ -65,6 +57,8 @@ public class VentanaGato extends javax.swing.JFrame {
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Juego del gato");
+        setResizable(false);
 
         pnlGato.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
