@@ -1,18 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Esta clase es la encargada de establecer la lógica del juego del gato.
+ * Tiene como atributos la matriz, el turno y el contador de jugadas. 
+ * 
+ * @version 15 de junio 2016 
+ * @author Humberto
  */
+
 package vista;
 
 import controlador.ControladorGato;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
-import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Esta clase es la encargada de establecer la interfaz del juego del gato.
+ * Tiene como atributos un arreglo de imágenes para los botones, el turno 
+ * y una instancia a la clase controlador (para que establezca la comunicación
+ * con la lógica)
+ * 
+ * @version 15 de junio 2016 
  * @author Humberto
  */
 public class VentanaGato extends javax.swing.JFrame {
@@ -22,14 +29,14 @@ public class VentanaGato extends javax.swing.JFrame {
      */
     private controlador.ControladorGato controlador;
     private int turno;
-    private ImageIcon[] arregloImagen;
+    private final ImageIcon[] arregloImagenBoton; 
     
     public VentanaGato() {
         this.turno = 0;
         this.controlador = new ControladorGato(this);
-        this.arregloImagen = new ImageIcon[2];
-        this.arregloImagen[0] = new ImageIcon("letraO.png");
-        this.arregloImagen[1] = new ImageIcon("letraX.gif");
+        this.arregloImagenBoton = new ImageIcon[2];
+        this.arregloImagenBoton[0] = new ImageIcon("letraO.png");
+        this.arregloImagenBoton[1] = new ImageIcon("letraX.gif");
         initComponents();
     }
 
@@ -53,8 +60,7 @@ public class VentanaGato extends javax.swing.JFrame {
         btnDerArriba = new javax.swing.JButton();
         btnDerCentro = new javax.swing.JButton();
         btnDerAbajo = new javax.swing.JButton();
-        lblTurno = new javax.swing.JLabel();
-        lblJugador = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
@@ -192,42 +198,36 @@ public class VentanaGato extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        lblTurno.setText("Turno:");
-
-        lblJugador.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblTitulo.setText("Juego del Gato: Es para dos jugadores");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(lblTurno)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(pnlGato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(pnlGato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTitulo))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlGato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblTurno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblJugador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addComponent(pnlGato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /*
+    Métodos set y get
+    */
     public ControladorGato getControlador() {
         return controlador;
     }
@@ -235,51 +235,73 @@ public class VentanaGato extends javax.swing.JFrame {
     public void setControlador(ControladorGato controlador) {
         this.controlador = controlador;
     }
+
+    public int getTurno() {
+        return turno;
+    }
+
+    public void setTurno(int turno) {
+        this.turno = turno;
+    }
     
-    public void cambiarTurno(boolean respuesta){
-        //int turno;
-        if (this.turno == 0){
-            this.turno = 1;
+    /**
+     * Este método se llama para cambiar el turno luego de apretar un botón.
+     * El turno 0 es el jugador 1 y el turno 1 es el jugador 2.
+     */
+    public void cambiarTurno(){
+        if (getTurno() == 0){
+            setTurno(1);
         }
         else {
-            this.turno = 0;
+            setTurno(0);
         }
     }
     
+    /**
+    * Este método muestra un jOoptionPane para saber si quiere seguir jugando o
+    * no. 
+    * 
+    */
     public void mostrarMensajeGanador(){
         int resultado, respuesta;
         resultado = getControlador().establecerGanador();
         if (resultado == 0){
             respuesta = JOptionPane.showConfirmDialog(null,  "¿Jugar de Nuevo?", "Ganó Jugador "
-                    + this.turno+1,
+                    + Integer.toString(this.turno+1),
                     JOptionPane.YES_NO_OPTION);
-            if (respuesta == JOptionPane.YES_OPTION){
-                resetearJuego();
-            }
-            else{
-                this.dispose();
-            }
+            generarAccionRespuesta(respuesta);
             
         }
         else if (resultado == 1){
             respuesta = JOptionPane.showConfirmDialog (null,  "¿Jugar de Nuevo?", "Empate",
                     JOptionPane.YES_NO_OPTION);
-            if (respuesta == JOptionPane.YES_OPTION){
+            generarAccionRespuesta(respuesta);
+            
+        }   
+    }
+    
+    /**
+    * Este método genera la accion de la respuesta del option pane luego de 
+    * terminar el juego. Si la respuesta es si resetea el juego y si no cierra
+    * la ventana. 
+    * 
+    * @param pRespuesta la respuesta que recibe del option pane
+    */
+    public void generarAccionRespuesta (int pRespuesta){
+        if (pRespuesta == JOptionPane.YES_OPTION){
                 resetearJuego();
             }
             else{
                 this.dispose();
             }
-        }
-        
     }
     
-    public void generarRespuesta (int pRespuesta){
-        if (pRespuesta == JOptionPane.YES_OPTION){
-            
-        }
-    }
-    
+    /**
+    * Este método restablece los valores originales de los botones en
+    * la pantalla de juego. Los íconos los pone en null y los vuelve a
+    * habililtar
+    * 
+    */
     public void resetearJuego(){
         btnCentroAbajo.setEnabled(true);
         btnCentroArriba.setEnabled(true);
@@ -300,99 +322,100 @@ public class VentanaGato extends javax.swing.JFrame {
         btnDerArriba.setIcon(null);
         btnDerCentro.setIcon(null);
         getControlador().resetearJuego();
-        this.turno = 0;
+        setTurno(0);
     }
-
+    
+    /*
+     * 
+     * Botones de la interfaz. 
+     */
     private void btnIzqArribaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzqArribaActionPerformed
         getControlador().recibirPosicion(0, 0);
-        cambiarTurno(getControlador().getRespuesta());
-        btnIzqArriba.setIcon(this.arregloImagen[this.turno]);
+        btnIzqArriba.setIcon(this.arregloImagenBoton[getTurno()]);
         btnIzqArriba.setEnabled(false);
         getControlador().cambiarTurno();
         mostrarMensajeGanador();
+        cambiarTurno();
     }//GEN-LAST:event_btnIzqArribaActionPerformed
 
     private void btnIzqCentroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzqCentroActionPerformed
         getControlador().recibirPosicion(0, 1);
-        cambiarTurno(getControlador().getRespuesta());
-        btnIzqCentro.setIcon(this.arregloImagen[this.turno]);
+        btnIzqCentro.setIcon(this.arregloImagenBoton[getTurno()]);
         btnIzqCentro.setEnabled(false);
         getControlador().cambiarTurno();
         mostrarMensajeGanador();
+        cambiarTurno();
     }//GEN-LAST:event_btnIzqCentroActionPerformed
 
     private void btnIzqAbajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzqAbajoActionPerformed
         getControlador().recibirPosicion(0, 2);
-        cambiarTurno(getControlador().getRespuesta());
-        btnIzqAbajo.setIcon(this.arregloImagen[this.turno]);
+        btnIzqAbajo.setIcon(this.arregloImagenBoton[getTurno()]);
         btnIzqAbajo.setEnabled(false);
         getControlador().cambiarTurno();
         mostrarMensajeGanador();
+        cambiarTurno();
     }//GEN-LAST:event_btnIzqAbajoActionPerformed
 
     private void btnCentroArribaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCentroArribaActionPerformed
         getControlador().recibirPosicion(1, 0);
-        cambiarTurno(getControlador().getRespuesta());
-        btnCentroArriba.setIcon(this.arregloImagen[this.turno]);
+        btnCentroArriba.setIcon(this.arregloImagenBoton[getTurno()]);
         btnCentroArriba.setEnabled(false);
         getControlador().cambiarTurno();
         mostrarMensajeGanador();
+        cambiarTurno();
     }//GEN-LAST:event_btnCentroArribaActionPerformed
 
     private void btnCentroCentroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCentroCentroActionPerformed
         getControlador().recibirPosicion(1, 1);
-        cambiarTurno(getControlador().getRespuesta());
-        btnCentroCentro.setIcon(this.arregloImagen[this.turno]);
+        btnCentroCentro.setIcon(this.arregloImagenBoton[getTurno()]);
         btnCentroCentro.setEnabled(false);
         getControlador().cambiarTurno();
         mostrarMensajeGanador();
+        cambiarTurno();
     }//GEN-LAST:event_btnCentroCentroActionPerformed
 
     private void btnCentroAbajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCentroAbajoActionPerformed
         getControlador().recibirPosicion(1, 2);
-        cambiarTurno(getControlador().getRespuesta());
-        btnCentroAbajo.setIcon(this.arregloImagen[this.turno]);
+        btnCentroAbajo.setIcon(this.arregloImagenBoton[getTurno()]);
         btnCentroAbajo.setEnabled(false);
         getControlador().cambiarTurno();
         mostrarMensajeGanador();
+        cambiarTurno();
     }//GEN-LAST:event_btnCentroAbajoActionPerformed
 
     private void btnDerArribaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDerArribaActionPerformed
         getControlador().recibirPosicion(2, 0);
-        cambiarTurno(getControlador().getRespuesta());
-        btnDerArriba.setIcon(this.arregloImagen[this.turno]);
+        btnDerArriba.setIcon(this.arregloImagenBoton[getTurno()]);
         btnDerArriba.setEnabled(false);
         getControlador().cambiarTurno();
         mostrarMensajeGanador();
+        cambiarTurno();
     }//GEN-LAST:event_btnDerArribaActionPerformed
 
     private void btnDerCentroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDerCentroActionPerformed
         getControlador().recibirPosicion(2, 1);
-        cambiarTurno(getControlador().getRespuesta());
-        btnDerCentro.setIcon(this.arregloImagen[this.turno]);
+        btnDerCentro.setIcon(this.arregloImagenBoton[getTurno()]);
         btnDerCentro.setEnabled(false);
         getControlador().cambiarTurno();
         mostrarMensajeGanador();
+        cambiarTurno();
     }//GEN-LAST:event_btnDerCentroActionPerformed
 
     private void btnDerAbajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDerAbajoActionPerformed
         getControlador().recibirPosicion(2, 2);
-        cambiarTurno(getControlador().getRespuesta());
-        btnDerAbajo.setIcon(this.arregloImagen[this.turno]);
+        btnDerAbajo.setIcon(this.arregloImagenBoton[getTurno()]);
         btnDerAbajo.setEnabled(false);
         getControlador().cambiarTurno();
         mostrarMensajeGanador();
+        cambiarTurno();
     }//GEN-LAST:event_btnDerAbajoActionPerformed
     
-    
-    public void setTurnoJugador(String pJugador){
-        lblJugador.setText(pJugador);
-    }
-    
-    public void desplegarError(String pMensajeError){
-        JOptionPane.showMessageDialog(this, pMensajeError);
-    }
-    
+    /**
+    * Crea la instancia de ventana de gato y la pone visible. 
+    * A su vez pone los parámetros de look and feel para 
+    * Windows.
+    *
+    */
     public void iniciarVentana(){
         try{
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -420,8 +443,7 @@ public class VentanaGato extends javax.swing.JFrame {
     private javax.swing.JButton btnIzqArriba;
     private javax.swing.JButton btnIzqCentro;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel lblJugador;
-    private javax.swing.JLabel lblTurno;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel pnlGato;
     // End of variables declaration//GEN-END:variables
 }
