@@ -40,4 +40,8 @@ public class ControladorGato {
         return resultado;
     }
     
+    public void resetearJuego(){
+        gato.resetearJuego();
+    }
+    
 }

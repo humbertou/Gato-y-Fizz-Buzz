@@ -253,11 +253,23 @@ public class VentanaGato extends javax.swing.JFrame {
             respuesta = JOptionPane.showConfirmDialog(null,  "¿Jugar de Nuevo?", "Ganó Jugador "
                     + this.turno+1,
                     JOptionPane.YES_NO_OPTION);
+            if (respuesta == JOptionPane.YES_OPTION){
+                resetearJuego();
+            }
+            else{
+                this.dispose();
+            }
             
         }
         else if (resultado == 1){
-            JOptionPane.showMessageDialog(null,  "¿Jugar de Nuevo?", "Empate",
+            respuesta = JOptionPane.showConfirmDialog (null,  "¿Jugar de Nuevo?", "Empate",
                     JOptionPane.YES_NO_OPTION);
+            if (respuesta == JOptionPane.YES_OPTION){
+                resetearJuego();
+            }
+            else{
+                this.dispose();
+            }
         }
         
     }
@@ -269,8 +281,26 @@ public class VentanaGato extends javax.swing.JFrame {
     }
     
     public void resetearJuego(){
-        this.dispose();
-        
+        btnCentroAbajo.setEnabled(true);
+        btnCentroArriba.setEnabled(true);
+        btnCentroCentro.setEnabled(true);
+        btnIzqAbajo.setEnabled(true);
+        btnIzqArriba.setEnabled(true);
+        btnIzqCentro.setEnabled(true);
+        btnDerAbajo.setEnabled(true);
+        btnDerArriba.setEnabled(true);
+        btnDerCentro.setEnabled(true);
+        btnCentroAbajo.setIcon(null);
+        btnCentroArriba.setIcon(null);
+        btnCentroCentro.setIcon(null);
+        btnIzqAbajo.setIcon(null);
+        btnIzqArriba.setIcon(null);
+        btnIzqCentro.setIcon(null);
+        btnDerAbajo.setIcon(null);
+        btnDerArriba.setIcon(null);
+        btnDerCentro.setIcon(null);
+        getControlador().resetearJuego();
+        this.turno = 0;
     }
 
     private void btnIzqArribaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzqArribaActionPerformed

@@ -149,4 +149,11 @@ public final class Gato {
             setTurno(true);
         }
     }
+    
+    public void resetearJuego(){
+        this.turno = true;
+        this.numJugada = 0;
+        iniciarTablero();
+        iniciarTablero();
+    }
 }
